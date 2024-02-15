@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "Bch";
+  src: url("./assets/fonts/BCH.games.woff2") format("woff2");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
