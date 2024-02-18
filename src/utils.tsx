@@ -9,7 +9,7 @@ export const levels = [
         viewBox="0 0 14 22"
         style={{ height: "22px", width: "14px" }}
       >
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <g id="difficulty-icon">
             <path
               d="M2.5,0 L11.5,0 C12.8807119,-2.53632657e-16 14,1.11928813 14,2.5 L14,19.5 C14,20.8807119 12.8807119,22 11.5,22 L2.5,22 C1.11928813,22 1.69088438e-16,20.8807119 0,19.5 L0,2.5 C-1.69088438e-16,1.11928813 1.11928813,2.53632657e-16 2.5,0 Z"
@@ -47,7 +47,7 @@ export const levels = [
         viewBox="0 0 14 22"
         style={{ height: "22px", width: "14px" }}
       >
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <g id="difficulty-icon">
             <path
               d="M2.5,0 L11.5,0 C12.8807119,-2.53632657e-16 14,1.11928813 14,2.5 L14,19.5 C14,20.8807119 12.8807119,22 11.5,22 L2.5,22 C1.11928813,22 1.69088438e-16,20.8807119 0,19.5 L0,2.5 C-1.69088438e-16,1.11928813 1.11928813,2.53632657e-16 2.5,0 Z"
@@ -85,7 +85,7 @@ export const levels = [
         viewBox="0 0 14 22"
         style={{ height: "22px", width: "14px" }}
       >
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <g id="difficulty-icon">
             <path
               d="M2.5,0 L11.5,0 C12.8807119,-2.53632657e-16 14,1.11928813 14,2.5 L14,19.5 C14,20.8807119 12.8807119,22 11.5,22 L2.5,22 C1.11928813,22 1.69088438e-16,20.8807119 0,19.5 L0,2.5 C-1.69088438e-16,1.11928813 1.11928813,2.53632657e-16 2.5,0 Z"
@@ -113,3 +113,32 @@ export const levels = [
     ),
   },
 ];
+
+export function generateArray(level: number, index: number): Tile[] {
+  const array: Tile[] = [];
+  let sCount = 0;
+  let cCount = 0;
+
+  let maxS = 1;
+  if (level === 1) {
+    maxS = 2;
+  } else if (level === 0) {
+    maxS = 3;
+  }
+
+  for (let i = 0; i < 4; i++) {
+    if ((sCount < maxS && cCount < 4 - maxS) || cCount === 4 - maxS) {
+      array.push({ id: 0, type: "skull", isShow: false });
+      sCount++;
+    } else {
+      array.push({ id: 0, type: "coin", isShow: false });
+      cCount++;
+    }
+  }
+
+  array.sort(() => Math.random() - 0.5);
+  array.forEach((_item, i) => {
+    array[i].id = 4 * index + i + 1;
+  });
+  return array;
+}
